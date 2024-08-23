@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Section = ({ color, children }) => {
+const Section = ({ children }) => {
   return (
     <div
-      className={`flex-shrink-0 w-screen h-screen flex items-center justify-center ${color}`}
+      className={`flex-shrink-0 w-screen h-screen flex items-center justify-center`}
     >
       {children}
     </div>

@@ -19,7 +19,8 @@ export default {
         worksans: ["Work Sans", "sans-serif"],
         poppins: ['Poppins', "sans-serif"],
         kanit: ["Kanit", "sans-serif"],
-        economica: ["Economica", "sans-serif"]
+        economica: ["Economica", "sans-serif"],
+        poiret: ["Poiret One", "sans-serif"],
       },
     },
   },

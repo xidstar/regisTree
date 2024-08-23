@@ -45,7 +45,7 @@ const Navbar = ({ sections, scrollToSection }) => {
                 </button>
                 
                 <a href="/">
-                  <img src={logo2} alt="RegisTree logo" />
+                  <img src={logo2} alt="RegisTree logo" className='w-[7rem]' />
                 </a>
             </div>
             
@@ -60,10 +60,10 @@ const Navbar = ({ sections, scrollToSection }) => {
               {sections.map((section, index) => (
                 <button
                   key={index}
-                  className="text-black font-economica text-xl font-bold"
+                  className="text-black font-economica text-[5rem] font-bold"
                   onClick={() => scrollToSection(index)}
                 >
-                  {section.content}
+                  {section.title}
                 </button>
               ))}
             </div>

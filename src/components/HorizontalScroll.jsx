@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, animate } from 'framer-motion';
-import Section from './Section';
 import Navbar from './Navbar';
 import Homepage from '../pages/Homepage';
 import About from '../pages/About';
@@ -9,11 +8,11 @@ import Contact from '../pages/Contact';
 import Blog from '../pages/Blog';
 
 const sections = [
-  { color: '#a6a999', content: <Homepage /> }, 
-  { color: '#F6F2EF', content: <About /> }, 
-  { color: '#fce8d8', content: <Sustainability /> }, 
-  { color: '#87e6d0', content: <Blog /> }, 
-  { color: '#D9CEDF', content: <Contact /> },
+  { title: 'Home', content: <Homepage /> }, 
+  { title: 'About', content: <About /> }, 
+  { title: 'Sustainability', content: <Sustainability /> }, 
+  { title: 'Partners', content: <Blog /> }, 
+  { title: 'Contact', content: <Contact /> },
 ];
 
 const HorizontalScroll = () => {
@@ -71,7 +70,6 @@ const HorizontalScroll = () => {
     '#ad8650',  // purple-400
   ];
 
-
   // smooth backgroundColor transition
   useEffect(() => {
     const handleScroll = () => {
@@ -81,6 +79,7 @@ const HorizontalScroll = () => {
         const currentSectionIndex = Math.round(scrollLeft / sectionWidth);
         
         const targetColor = colors[currentSectionIndex];
+
 
         
         sections.forEach((section, index) => {
@@ -160,11 +159,9 @@ const HorizontalScroll = () => {
               <div
                 key={index}
                 ref={sectionRefs[index]}
-                className="flex-none w-screen h-full flex items-center justify-center snap-center"
+                className="flex-none w-full h-screen flex items-center justify-center"
               >
-                <h1 className="text-black font-sans text-5xl font-bold">
-                  {section.content}
-                </h1>
+                {section.content}
               </div>
           ))}
           <span className='progressBar'></span>
