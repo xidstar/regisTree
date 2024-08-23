@@ -8,6 +8,7 @@ import leaf7 from "./leaf-7.png";
 import food1 from "./food-1.avif";
 import food2 from "./food-2.jpeg";
 import food3 from "./food-3.webp";
-import logo1 from "./registree.png"
+import logo1 from "./registree.png";
+import logo2 from "./RegisTree_01.png";
 
-export {leaf1, leaf2, leaf3, leaf4, leaf5, leaf6, leaf7, food1, food2, food3, logo1}
+export {leaf1, leaf2, leaf3, leaf4, leaf5, leaf6, leaf7, food1, food2, food3, logo1, logo2}

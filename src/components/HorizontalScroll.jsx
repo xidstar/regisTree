@@ -8,8 +8,13 @@ import Sustainability from '../pages/Sustainability';
 import Contact from '../pages/Contact';
 import Blog from '../pages/Blog';
 
-const hiddenMask = `repeating-linear-gradient(to right, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 30px, rgba(0,0,0,1) 30px, rgba(0,0,0,1) 30px)`;
-const visibleMask = `repeating-linear-gradient(to right, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 0px, rgba(0,0,0,1) 0px, rgba(0,0,0,1) 30px)`;
+const sections = [
+  { color: '#a6a999', content: <Homepage /> }, 
+  { color: '#F6F2EF', content: <About /> }, 
+  { color: '#fce8d8', content: <Sustainability /> }, 
+  { color: '#87e6d0', content: <Blog /> }, 
+  { color: '#D9CEDF', content: <Contact /> },
+];
 
 const HorizontalScroll = () => {
   const scrollRef = useRef(null);
@@ -17,6 +22,7 @@ const HorizontalScroll = () => {
   const [isLoading, setIsLoading] = useState(true);
   const scrollAmountRef = useRef(0);
   const isScrollingRef = useRef(false);
+  const sectionRefs = sections.map(() => useRef(null));
 
 
   // smooth scrolling
@@ -26,9 +32,9 @@ const HorizontalScroll = () => {
     const smoothScroll = () => {
       if (isScrollingRef.current) {
         scrollContainer.scrollLeft += scrollAmountRef.current * 0.1;
-        scrollAmountRef.current *= 0.955; // Dampen the scroll amount
+        scrollAmountRef.current *= 0.93; // Dampen the scroll amount
 
-        if (Math.abs(scrollAmountRef.current) > 0.95) {
+        if (Math.abs(scrollAmountRef.current) > 0.93) {
           requestAnimationFrame(smoothScroll);
         } else {
           isScrollingRef.current = false;
@@ -56,21 +62,13 @@ const HorizontalScroll = () => {
       }
     };
   }, [isLoading]);
-
-  const sections = [
-    { color: '#a6a999', content: <Homepage /> }, 
-    { color: '#F6F2EF', content: <About /> }, 
-    { color: '#fce8d8', content: <Sustainability /> }, 
-    { color: '#87e6d0', content: <Blog /> }, 
-    { color: '#D9CEDF', content: <Contact /> },
-  ];
   
   const colors = [
     '#a6a999',  // red-400
     '#F6F2EF',  // blue-400
     '#fce8d8',  // green-400
     '#2D312A',  // yellow-400
-    '#D9CEDF',  // purple-400
+    '#ad8650',  // purple-400
   ];
 
 
@@ -97,7 +95,7 @@ const HorizontalScroll = () => {
 
         //Apply smooth animation to background color using Framer Motion's animate function
         animate(backgroundColor, targetColor, {
-          duration: 0.4, // Control the duration of the animation
+          duration: 0.2, // Control the duration of the animation
           ease: [0.2, 0, 0.18, 1], // Custom easing curve (similar to ease-in-out)
           onUpdate: (latestColor) => setBackgroundColor(latestColor),
         });
@@ -136,23 +134,42 @@ const HorizontalScroll = () => {
     };
   }, []);
 
+  const scrollToSection = (index) => {
+    sectionRefs[index].current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'start',
+    });
+  };
 
   return (
-    <motion.div
-      ref={scrollRef}
-      className={`flex overflow-x-scroll h-screen overflow-y-hidden`}
-      drag="x"
-      dragConstraints={{ left: -500, right: 0 }}
-      style={{ backgroundColor }}
-    >
-        <Navbar />
-        {sections.map((section, index) => (
-            <Section key={index} color="transparent">
-              {section.content}
-            </Section>
-         ))}
-         <span className='progressBar'></span>
-    </motion.div>
+    <>
+      <Navbar 
+        sections={sections}
+        scrollToSection={scrollToSection}
+      />
+      <motion.div
+        ref={scrollRef}
+        className={`flex overflow-x-scroll h-screen overflow-y-hidden`}
+        drag="x"
+        dragConstraints={{ left: -500, right: 0 }}
+        style={{ backgroundColor }}
+      >
+          
+          {sections.map((section, index) => (
+              <div
+                key={index}
+                ref={sectionRefs[index]}
+                className="flex-none w-screen h-full flex items-center justify-center snap-center"
+              >
+                <h1 className="text-black font-sans text-5xl font-bold">
+                  {section.content}
+                </h1>
+              </div>
+          ))}
+          <span className='progressBar'></span>
+      </motion.div>
+    </>
   );
 };
 

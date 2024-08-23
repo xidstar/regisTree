@@ -6,14 +6,18 @@ import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { useSnapshot } from "valtio";
 import state from "../store";
 import { fadeAnimation, slideAnimation } from '../config/motion';
-import { logo1 } from '../images';
+import { logo2 } from '../images';
 
 
-const scrollToSection = (id) => {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-  };
+const scrollToSection = (index) => {
+  sectionRefs[index].current.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+    inline: 'start',
+  });
+};
 
-const Navbar = () => {
+const Navbar = ({ sections, scrollToSection }) => {
   const snap = useSnapshot(state);
   
 
@@ -41,21 +45,27 @@ const Navbar = () => {
                 </button>
                 
                 <a href="/">
-                  <img src={logo1} alt="RegisTree logo" />
+                  <img src={logo2} alt="RegisTree logo" />
                 </a>
             </div>
             
           </div>
 
+          
+
           <div className={`page-links h-screen flex justify-center items-center bg-slate-100 w-full md:min-w-[50vw] absolute left-0 top-0 z-30 text-4xl duration-500 
             ${snap.isMenuOpen ? "" : "-translate-x-full"}`} {...state.isMenuOpen ? {...slideAnimation("right")} : {...slideAnimation("left")}}>
             <div className="link-wrapper flex flex-col justify-between h-[40%]" onClick={toggleMenu}>
               {/* <Link href="/" onClick={toggleMenu}>Home</Link>*/}
-              <button onClick={() => scrollToSection('section1')}>Home</button>
-              <button onClick={() => scrollToSection('section2')}>About</button>
-              <button onClick={() => scrollToSection('section3')}>Sustainability</button>
-              <button onClick={() => scrollToSection('section4')}>Blog</button>
-              <button onClick={() => scrollToSection('section5')}>Contact</button>
+              {sections.map((section, index) => (
+                <button
+                  key={index}
+                  className="text-black font-economica text-xl font-bold"
+                  onClick={() => scrollToSection(index)}
+                >
+                  {section.content}
+                </button>
+              ))}
             </div>
           </div>
         </motion.div>
