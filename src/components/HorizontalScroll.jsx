@@ -166,6 +166,7 @@ const HorizontalScroll = () => {
           ))}
           <span className='progressBar'></span>
       </motion.div>
+      
     </>
   );
 };

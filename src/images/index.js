@@ -10,5 +10,9 @@ import food2 from "./food-2.jpeg";
 import food3 from "./food-3.webp";
 import logo1 from "./registree.png";
 import logo2 from "./RegisTree_01.png";
+import plant from './plant.png'
+import planting1 from './image0.jpeg';
+import planting2 from './image1.jpeg';
+import planting3 from './image2.jpeg';
 
-export {leaf1, leaf2, leaf3, leaf4, leaf5, leaf6, leaf7, food1, food2, food3, logo1, logo2}
+export {leaf1, leaf2, leaf3, leaf4, leaf5, leaf6, leaf7, food1, food2, food3, logo1, logo2, plant, planting1, planting2, planting3}

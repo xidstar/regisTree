@@ -22,3 +22,33 @@ body {
     display: inline-block;
     background-color: red;
 }
+
+.home {
+    background-image: url('./images/compost.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.mission {
+    background-image: url('./images/bg-about.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.title-wrapper {
+    height: 10rem;
+    position: relative;
+    display: inline-block;
+}
+
+.title-wrapper:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: #333;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
